@@ -1,52 +1,56 @@
-// <⚠️ DONT DELETE THIS ⚠️>
-// import "styles.css";
-// <⚠️ /DONT DELETE THIS ⚠️>
-const country = document.querySelector(".Country");
-const greeting = document.querySelector(".js-greeting");
-const COUNTRY_LS = "country";
-const SHOWING_CN = "showing";
+const PEND_LS = "PENDING";
+const FIN_LS = "FINISHED";
+const form = document.querySelector(".js-form"),
+  input = document.querySelector(".js-input"),
+  pendList = document.querySelector(".js-pending"),
+  finList = document.querySelector(".js-finished");
+let toDoPending = [];
+let toDoFinished = [];
+let idNum = 1;
 
-function saveCountry(text) {
-  localStorage.setItem(COUNTRY_LS, text);
+function savePending() {
+  localStorage.setItem(PEND_LS, JSON.stringify(pendList));
 }
 
-function paintGreeting(country) {
-  greeting.classList.add(SHOWING_CN);
-  if (country === "KR") {
-    greeting.innerText = "안녕하세요!";
-  } else if (country === "GR") {
-    greeting.innerText = "Καλημέρα!";
-  } else if (country === "TK") {
-    greeting.innerText = "Günaydın!";
-  } else if (country === "FL") {
-    greeting.innerText = "Hyvää huomenta!";
-  }
+function handleDel(event) {}
+
+function handleFin(event) {}
+
+function paintPending(text) {
+  const li = document.createElement("li");
+  const delBtn = document.createElement("button");
+  const finBtn = document.createElement("button");
+  const span = document.createElement("span");
+  delBtn.innerText = "❌";
+  delBtn.addEventListener("click", handleDel);
+  finBtn.innerText = "✅";
+  finBtn.addEventListener("click", handleFin);
+  span.innerText = text;
+  li.appendChild(span);
+  li.appendChild(delBtn);
+  li.appendChild(finBtn);
+  li.id = idNum;
+  pendList.appendChild(li);
+  const pendObj = {
+    text,
+    id: idNum
+  };
+  toDoPending.push(pendObj);
+  idNum += 1;
+  savePending();
 }
 
-function handleChange(event) {
-  const currentValue = event.target.value;
-  country.classList.remove(SHOWING_CN);
-  greeting.classList.add(SHOWING_CN);
-  saveCountry(currentValue);
-  paintGreeting(currentValue);
+function handleSubmit(event) {
+  event.preventDefault();
+  const currentValue = input.value;
+  paintPending(currentValue);
+  input.value = "";
 }
-
-function asKCountry() {
-  country.classList.add(SHOWING_CN);
-  country.addEventListener("change", handleChange);
-}
-
-function loadCountry() {
-  const currentCountry = localStorage.getItem(COUNTRY_LS);
-  if (currentCountry === null) {
-    asKCountry();
-  } else {
-    paintGreeting(currentCountry);
-  }
-}
+function loadToDos() {}
 
 function init() {
-  loadCountry();
+  loadToDos();
+  form.addEventListener("submit", handleSubmit);
 }
 
 init();
