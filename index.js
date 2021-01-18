@@ -9,10 +9,25 @@ let toDoFinished = [];
 let idNum = 1;
 
 function savePending() {
-  localStorage.setItem(PEND_LS, JSON.stringify(pendList));
+  localStorage.setItem(PEND_LS, JSON.stringify(toDoPending));
 }
 
-function handleDel(event) {}
+function handleDel(event) {
+  const li = event.target.parentNode;
+  const cleanPending = toDoPending.filter(function (toDo) {
+    return toDo.id !== parseInt(li.id, 10);
+  });
+  while (pendList.firstChild) {
+    pendList.removeChild(pendList.firstChild);
+  }
+  idNum = 1;
+  cleanPending.forEach(function (toDo) {
+    toDo.id = idNum;
+    paintPending(toDo.text);
+  });
+  toDoPending = cleanPending;
+  savePending();
+}
 
 function handleFin(event) {}
 
