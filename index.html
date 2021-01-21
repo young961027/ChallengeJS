@@ -6,14 +6,16 @@
     <meta charset="UTF-8" />
   </head>
   <body>
-    <h1>Tasks</h1>
-    <form class="js-form">
-      <input class="js-input" placeholder="Add task" />
-    </form>
-    <h2>Pending</h2>
-    <ul class="js-pending"></ul>
-    <h2>Finished</h2>
-    <ul class="js-finished"></ul>
+    <<h1>Random Number Game</h1>
+    <h2 class="js-notice">Generate a Number between 0 and</h2>
+    <input type="range" class="js-range" min="0" max="250" />
+    <p>
+      Guess the Number!
+      <input class="js-input" type="number" min="0" max="250" width="200" />
+      <button class="js-button">play!</button>
+    </p>
+    <span class="js-span"></span>
+    <h4 class="js-result"></h4>
     <script src="index.js"></script>
   </body>
 </html>
