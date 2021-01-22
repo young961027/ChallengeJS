@@ -35,7 +35,12 @@ body {
 }
 .status {
   grid-column: auto / span 3;
-  font-size: 35px;
+  font-size: 70px;
+  color: white;
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 .number {
   grid-column: auto / span 1;
