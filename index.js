@@ -75,10 +75,8 @@ function handleOperator(event) {
 function handleEqual(event) {
     wasOp = 1;
     if (opCount === 0) {
-        console.log("SHIT");
         handleClear(event);
     } else if(opCount === 1) {
-        console.log(num1,num2,op1,opCount);
         num2 = parseInt(status.innerText);
         if(op1 === "+") {
             result = num1 + num2;
